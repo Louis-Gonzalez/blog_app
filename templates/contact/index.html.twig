@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1 class="text-center">Hello {{ controller_name }} !</h1>
+
+    <div class= "text-center">
+        <form class="text-center" method="POST" action="http://localhost/formation_php/todolist_php/public/contact/new" >
+            <div class="m-6"> <!-- faire un menu déroulant -->
+                <label for="title-message">Titre du message</label>
+                <select name="title-message" id="title-message" required>
+                    <option>--Please choose an option--</option>
+                    <option>Envoyer du soutien</option>
+                    <option>Poser une question</option>
+                    <option>Rencontrer un problème</option>
+                </select>
+            </div>
+            <div class="m-2" >
+                <label for="description-message" class="form-label">Description du message *</label>
+                <textarea maxlength="1000" class="form-control" style="height: 300px" placeholder="Description du message" name="description-message" required></textarea>
+            </div>
+            <div class="m-2" >
+                <label for="email-message" class="form-label">Ecrivez votre email *</label>
+                <input  class="form-control" type="email" placeholder="Renseigner votre email" name="email-message" required></input>
+            </div>
+            <div>
+                <a class="btn btn-primary" href="/">Back</a>
+                <a class="btn btn-info" href="/contact/show">Show message</a>
+                <button type="submit" class="btn btn-success m-1">Envoyer votre message</button>
+            </div>
+        </form>
+
+    This friendly message is coming from:
+    <ul>
+        <li>Your controller at <code>C:/Users/69VFOMT104-13/blog-app/src/Controller/ContactController.php</code></li>
+        <li>Your template at <code>C:/Users/69VFOMT104-13/blog-app/templates/contact/index.html.twig</code></li>
+    </ul>
+</div>
+{% endblock %}

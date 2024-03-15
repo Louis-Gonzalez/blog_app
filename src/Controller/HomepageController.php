@@ -17,10 +17,12 @@ class HomepageController extends AbstractController
     #[Route('/', name: 'app_home',methods:['GET'])]
     public function index(): Response
     {
-        
+        session_start();
+        $_SESSION['cookie'] = true;
         return $this->render('homepage/index.html.twig', [
-            'controller_name' => 'HomepageController',
-        ]);
+                                                            'controller_name' => 'HomepageController',
+                                                            'cookie' => $_SESSION['cookie']
+                                                        ]);
     }
     #[Route('/home', name: 'app_homepage_alt',methods:['GET'])]
     #[Route('/homepage', name: 'app_homepage',methods:['GET'])]
