@@ -45,6 +45,7 @@ Trait LifecycleTrackerTrait {
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
     {
+        
         $this->createdAt = new \DateTimeImmutable();
         $this->setUpdatedAtValue();
     }

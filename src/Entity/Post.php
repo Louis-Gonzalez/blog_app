@@ -6,6 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[ORM\Entity(repositoryClass: PostRepository::class)]
 #[HasLifecycleCallbacks]
@@ -30,6 +31,9 @@ class Post
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $author = null;
+
+    #[ORM\Column(length: 255, unique : true)] // slug est une chaine de caractère
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -80,4 +84,21 @@ class Post
         $this->author = $author;
         return $this;
     }
+
+    public function getSlug(): ?string 
+    {
+        return $this->slug;
+    }
+
+    #[ORM\PrePersist] // au moment où l'on créé le post dans la bdd on fait la méthode suivante :
+    #[ORM\PreUpdate] // idem pour la mise à jour
+    public function setSlug(): static // permet de modifer le titre en format slug
+    {
+        $this->slug = (new AsciiSlugger())->slug($this->title)->lower(); // créer et nettoie le titre au format slug
+
+        return $this;
+    }
+
+
 }
+

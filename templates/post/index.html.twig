@@ -10,6 +10,7 @@
             <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Slug</th>
                 <th>Content</th>
                 <th>Published</th>
                 <th>CreatedAt</th>
@@ -22,12 +23,14 @@
             <tr>
                 <td>{{ post.id }}</td>
                 <td>{{ post.title }}</td>
+                <td>{{ post.slug }}</td>
                 <td>{{ post.content }}</td>
                 <td>{{ post.published ? 'Yes' : 'No' }}</td>
                 <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ post.modifiedAt ? post.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                     <a href="{{ path('app_post_show', {'id': post.id}) }}">show</a>
+                    <a href="{{ path('app_post_show_by_slug', {'slug': post.slug}) }}"> Show by slug</a>
                     <a href="{{ path('app_post_edit', {'id': post.id}) }}">edit</a>
                 </td>
             </tr>
@@ -40,4 +43,5 @@
     </table>
 
     <a href="{{ path('app_post_new') }}">Create new</a>
+
 {% endblock %}
