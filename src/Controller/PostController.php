@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/post')]
+#[Route('/post')] // préfixe de toutes les routes Post #[Route('/post', name: postquelquechoses)] ce qui donnera toutes routes postquelquechoses_app_post_index , ......
 class PostController extends AbstractController
 {
     #[Route('/', name: 'app_post_index', methods: ['GET'])]
@@ -44,6 +44,14 @@ class PostController extends AbstractController
 
     #[Route('/{id}', name: 'app_post_show', methods: ['GET'])]
     public function show(Post $post): Response
+    {
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_post_show_by_slug', methods: ['GET'])]
+    public function showBySlug(Post $post): Response
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
