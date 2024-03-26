@@ -69,8 +69,7 @@ class Post
 
         return $this;
     }
-
-
+    
     public function getAuthor(): ?User
     {
         return $this->author;
