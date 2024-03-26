@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class User
 {
 
-    use \App\Traits\LifecycleTrakerTrait; // importe et instancie la classe LifecycleTrakerTrait
+    use \App\Traits\LifecycleTrackerTrait; // importe et instancie la classe LifecycleTrakerTrait
 
     #[ORM\Id]
     #[ORM\GeneratedValue] // équivaut à l'auto-increment

@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 #[HasLifecycleCallbacks]
 class Post
 {
-    use \App\Traits\LifecycleTrakerTrait; // importe et instancie la classe LifecycleTrakerTrait
+    use \App\Traits\LifecycleTrackerTrait; // importe et instancie la classe LifecycleTrakerTrait
 
     #[ORM\Id]
     #[ORM\GeneratedValue] // équivaut à l'auto-increment
@@ -69,7 +69,7 @@ class Post
 
         return $this;
     }
-    
+
     public function getAuthor(): ?User
     {
         return $this->author;

@@ -1,21 +1,21 @@
-<?php 
+<?php
 
 namespace App\Traits;
 
 use Doctrine\DBAL\Types\Types;
-use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\PrePersist;
 use Doctrine\ORM\Mapping\PreUpdate;
+use Doctrine\ORM\Mapping\PrePersist;
+use Doctrine\ORM\Mapping as ORM;
 
-trait LifecycleTrakerTrait {
+Trait LifecycleTrackerTrait {
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $modifiedAt = null;
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $modifiedAt = null;
 
-    
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -28,17 +28,19 @@ trait LifecycleTrakerTrait {
         return $this;
     }
 
-    public function getModifiedAt(): ?\DateTimeImmutable
+    
+    public function getModifiedAt(): ?\DateTimeInterface
     {
         return $this->modifiedAt;
     }
 
-    public function setModifiedAt(\DateTimeImmutable $modifiedAt): static
+    public function setModifiedAt(?\DateTimeInterface $modifiedAt): static
     {
         $this->modifiedAt = $modifiedAt;
 
         return $this;
     }
+
 
     #[ORM\PrePersist]
     public function setCreatedAtValue(): void
@@ -52,5 +54,4 @@ trait LifecycleTrakerTrait {
     {
         $this->modifiedAt = new \DateTime();
     }
-
 }

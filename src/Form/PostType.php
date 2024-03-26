@@ -17,12 +17,6 @@ class PostType extends AbstractType
             ->add('title')
             ->add('content')
             ->add('published')
-            ->add('createdAt', null, [
-                'widget' => 'single_text',
-            ])
-            ->add('modifiedAt', null, [
-                'widget' => 'single_text',
-            ])
             ->add('author', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'id',
