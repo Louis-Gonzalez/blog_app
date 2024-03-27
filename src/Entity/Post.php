@@ -90,15 +90,24 @@ class Post
         return $this->slug;
     }
 
-    #[ORM\PrePersist] // au moment où l'on créé le post dans la bdd on fait la méthode suivante :
-    #[ORM\PreUpdate] // idem pour la mise à jour
+    // #[ORM\PrePersist] // au moment où l'on créé le post dans la bdd on fait la méthode suivante :
+    // #[ORM\PreUpdate] // idem pour la mise à jour
     public function setSlug(): static // permet de modifer le titre en format slug
     {
-        $this->slug = (new AsciiSlugger())->slug($this->title)->lower(); // créer et nettoie le titre au format slug
-
+        $slugger = new AsciiSlugger();
+        $this->slug = $slugger->slug($this->title)->lower(); // créer et nettoie le titre au format slug
+        unset($slugger);
         return $this;
     }
 
-
+    #[ORM\PrePersist] // au moment où l'on créé le post dans la bdd on fait la méthode suivante :
+    #[ORM\PreUpdate] // idem pour la mise à jour
+    public function setSlugValue(): void // permet de modifer le titre en format slug
+    {
+        $slugger = new AsciiSlugger();
+        $this->slug = $slugger->slug($this->title)->lower(); // créer et nettoie le titre au format slug
+        unset($slugger);
+    }
+    
 }
 

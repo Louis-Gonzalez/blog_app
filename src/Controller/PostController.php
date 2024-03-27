@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 
+
 #[Route('/post')] // préfixe de toutes les routes Post #[Route('/post', name: postquelquechoses)] ce qui donnera toutes routes postquelquechoses_app_post_index , ......
 class PostController extends AbstractController
 {
