@@ -6,17 +6,40 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class AdminUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $roles = [
+            'Super Admin'   => 'ROLE_SUPER_ADMIN',
+            'Admin'         => 'ROLE_ADMIN',
+            'Editor'        => 'ROLE_EDITOR',
+            'User'          => 'ROLE_USER'
+        ];
         $builder
-            ->add('email')
-            ->add('username')
-            ->add('roles')
-            ->add('password')
-        ;
+        ->add('email', TextType::class, [
+            'required' => true
+        ])
+        ->add('username', TextType::class, [
+            'required' => true
+        ])
+        ->add('roles', ChoiceType::class, [
+            'label' => 'Roles',
+            'choices' => $roles,
+            'required' => true,
+            'multiple' => true,
+            'expanded' => false
+        ])
+        ->add('password', PasswordType::class, [
+            'required' => true,
+            'hash_property_path' => 'password',
+            'mapped' => false,
+        ])
+    ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

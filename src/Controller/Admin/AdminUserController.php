@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\Admin\AdminUserType;
@@ -17,7 +17,7 @@ class AdminUserController extends AbstractController
     #[Route('/', name: 'app_admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('admin_user/index.html.twig', [
+        return $this->render('admin/user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -36,7 +36,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin_user/new.html.twig', [
+        return $this->render('admin/user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -45,7 +45,7 @@ class AdminUserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('admin_user/show.html.twig', [
+        return $this->render('admin/user/show.html.twig', [
             'user' => $user,
         ]);
     }
@@ -62,7 +62,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin_user/edit.html.twig', [
+        return $this->render('admin/user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
